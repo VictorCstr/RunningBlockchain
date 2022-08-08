@@ -22,7 +22,7 @@ class Block {
         return new this(
             'Genesis time',
             '----------------------------------------------------------------',
-            '0000000000000000000000000000000000000000000000000000000000000000',
+            Block.hash('Genesis Time','----------------------------------------------------------------', [] ),
             []   
             )
     }
@@ -36,7 +36,7 @@ class Block {
     }
 
     static hash(timestamp, lastHash, data){
-      const hash = crypto.createHash('sha256', 'segredo')
+      const hash = crypto.createHash('sha256', process.env.SECRET_HASH)
       hash.update(timestamp.toString(), lastHash.toString(), data.toString())
       return hash.digest('hex')
     }
