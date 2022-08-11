@@ -36,4 +36,14 @@ describe("Blockchain", () => {
     blockChain2.chain[1].data = "R$0"
     expect(blockChain.isValidChain(blockChain2)).toBe(false)
   });
+
+  it("should replaces the chain with a valid chain", () => {
+    blockChain2.addBlock("R$200")
+    blockChain.replaceChain(blockChain2.chain)
+    expect(blockChain.chain).toEqual(blockChain2.chain)
+  });
+
+  it("should throw an Error while trying to replace a child with same length", () => {
+    expect( ()  => blockChain.replaceChain(blockChain2.chain)).toThrow('Received chain is not longer than the current chain')
+  });
 });
